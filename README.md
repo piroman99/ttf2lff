@@ -57,21 +57,26 @@ Typical uses:
 | `build-static.sh` | Fully static build: downloads FreeType 2.13.3, compiles it in, links with `-static` |
 | `ttf2lff.pro`, `freetype.pri` | Upstream Qt/qmake project files, for building **inside** the LibreCAD tree |
 | `ttf2lff.1` | Man page |
-| `dist/ttf2lff-linux-x86_64` | Prebuilt static binary (2 776 056 bytes) |
+| `dist/ttf2lff-linux-x86_64` | Prebuilt static binary (2 776 056 bytes), also attached to the v0.0.0.2 release |
 | `SHA256SUMS` | SHA-256 of the binary |
 | `LICENSE` | GPL-2.0 |
 
 ## Prebuilt static binary
 
-`dist/ttf2lff-linux-x86_64` — 2 776 056 bytes, SHA-256 in [`SHA256SUMS`](SHA256SUMS).
+Download from the [latest release](https://github.com/piroman99/ttf2lff/releases/latest)
+— `ttf2lff-linux-x86_64`, 2 776 056 bytes,
+SHA-256 `232bba0a426f34d08dc08becc5119243f20838e5531874ded30492fdc1103844`:
 
 ```sh
-curl -LO https://raw.githubusercontent.com/piroman99/ttf2lff/main/dist/ttf2lff-linux-x86_64
-curl -LO https://raw.githubusercontent.com/piroman99/ttf2lff/main/SHA256SUMS
+curl -LO https://github.com/piroman99/ttf2lff/releases/download/v0.0.0.2/ttf2lff-linux-x86_64
+curl -LO https://github.com/piroman99/ttf2lff/releases/download/v0.0.0.2/SHA256SUMS
 sha256sum -c SHA256SUMS
 chmod +x ttf2lff-linux-x86_64
 ./ttf2lff-linux-x86_64 --help
 ```
+
+The same file is also committed at `dist/ttf2lff-linux-x86_64`, if you would rather
+clone the repository than use release links.
 
 It is genuinely static: `readelf -d` reports **no `NEEDED` entries at all** — no
 `libfreetype`, no `libstdc++`, no `libc`. Nothing is resolved from the host, so it does
@@ -82,8 +87,8 @@ Smoke-tested here: `--help` and a full font conversion (see below). It has **not
 run on ALT Linux / RHEL by the packager — if it misbehaves on your system, please open an
 issue with `uname -a` and the exact command.
 
-The binary is committed to the repository on purpose: the recipient only needs the file
-itself, not a toolchain.
+The binary is published in [Releases](../../releases) (and committed to `dist/` as well) on
+purpose: the recipient only needs the file itself, not a toolchain.
 
 ## Usage
 
